@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<head version="1.0">
+    <debug start="false"/>
+    <filter start="true">
+        <exclude expression="/data/Finish"></exclude>
+    </filter>
+    <LFormatConvert Path="/usr/local/bin/ffmpeg">
+        <Parameter>
+            <DFileExist Value="1"></DFileExist><!-- 1-covering 0-rename file -->
+            <FinishDelete Value="0"></FinishDelete><!--1-Delete 0-No Detete-->
+            <Thread_Num Value="3"></Thread_Num><!--Run Process Count-->
+            <BeforeTime Value="1354204800"></BeforeTime><!--Unix timestamp-->
+            <InFileBefore Value="-i"></InFileBefore><!--Input file front to write parameters-->
+            <InFileAfter Value="-vcodec libx264 -acodec libfaac -s 720x576 -an -vb 1845000 -f flv"></InFileAfter>
+            <OutFileSuffix Value=".f4v"></OutFileSuffix>
+        </Parameter>
+        <Directory>
+            <FinishNoDelete Folder="/Finish/"></FinishNoDelete><!--valid when FinishDelete=1-->
+            <Source Folder="/data/"></Source>
+            <Destination Folder="/target/"></Destination>
+        </Directory>
+        <crontab start="false" schedule="1440"><!--1440mins-->
+            <crontabfilter start="true">
+                <exclude expression="img_web20"></exclude>
+                <exclude expression="templates_c/*"></exclude>
+            </crontabfilter>
+        </crontab>
+    </LFormatConvert>
+</head>
